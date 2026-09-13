@@ -1,47 +1,50 @@
-# Source Code
+# Codewarrior AI — Autonomous Cold-Chain & Supply Chain Resiliency Copilot
 
-Place all your project's source code in this folder.
+Codewarrior AI is an autonomous logistics and cold-chain resilience copilot powered by IBM Bob and watsonx.ai. It ingests real-time IoT temperature and GPS telemetry alongside active weather disruption feeds, calculates FDA/WHO-standard Mean Kinetic Temperature (MKT) degradation in real time, autonomously locates nearby idle refrigerated fleet assets, and triggers emergency divert runbooks to rescue high-value cargo before spoilage occurs.
 
-## Structure Guidelines
+---
 
-Organize your code logically. Here are common patterns — use whatever fits
-your project:
+## The Problem
+Supply chain disruptions such as severe blizzards, route closures, and fleet asset imbalances cascade across hundreds of active shipments. Cold-chain cargo—specifically life-saving pediatric vaccines, insulin, and biopharmaceuticals—is exceptionally vulnerable. A single refrigeration failure across any transit leg destroys upwards of $500,000 in cargo. Traditionally, these temperature excursions are only discovered at the destination dock when the cargo has already spoiled.
 
-### Web Application
-```
-src/
-  backend/        ← API server code
-  frontend/       ← UI code
-  shared/         ← Shared utilities/types
-```
+---
 
-### Data / AI Project
-```
-src/
-  data/           ← Data ingestion / preprocessing
-  models/         ← ML model code
-  api/            ← Serving layer
-  notebooks/      ← Jupyter notebooks (exploration)
-```
+## Key Features
+- Real-Time IoT Cold-Chain Sentinel: Continuously evaluates temperature telemetry and calculates Mean Kinetic Temperature (MKT) based on FDA/WHO biopharmaceutical degradation standards.
+- Geospatial Disruption Intersect Engine: Cross-references active shipment routes with real-time weather and road disruption polygons.
+- Autonomous Fleet Asset Rebalancing: Discovers idle refrigerated trailers (reefers) at nearby regional hubs and matches them for emergency cargo transfers.
+- Load-Bearing IBM Bob MCP Integration: Enables operators to query fleet risk conversationally and execute 1-click rescue runbooks through natural language.
+- Audit-Ready Regulatory Reporting: Generates instant compliance dossiers for pharmaceutical quality assurance officers.
 
-### CLI / Script-based Tool
-```
-src/
-  cli/            ← CLI entry points
-  lib/            ← Core logic
-  utils/          ← Helpers
-```
+---
 
-## Important Files to Include
+## Tech Stack
+- Backend: Python 3.11, FastAPI, Uvicorn, Pydantic
+- AI & Reasoning: IBM Bob, watsonx.ai (Granite 3.0), Model Context Protocol (MCP)
+- Frontend: React, TailwindCSS, Leaflet GeoJSON
+- Automation & CI/CD: GitHub Actions (Automated Submission Validator)
 
-- `requirements.txt` or `package.json` — dependency manifest
-- `.env.example` — template for environment variables (NEVER commit `.env`)
-- Any database migration files
-- Configuration files
+---
 
-## What NOT to Include in src/
+## How to Run Locally
 
-- `.env` files with real secrets
-- Large binary files (use Git LFS or link externally)
-- `node_modules/` or `venv/` (these are in `.gitignore`)
-- Build artifacts (`dist/`, `build/`, `__pycache__/`)
+### 1. Prerequisites
+- Python 3.10+
+- Node.js 18+ (for frontend)
+- Git
+
+### 2. Backend Setup
+Run the following commands:
+cd src/backend
+python -m venv .venv
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+
+API Documentation will be live at: http://localhost:8000/docs
+
+---
+
+## Team Codewarrior
+- Track: AI
+- Project: Codewarrior AI
+- Target Submission: IBM Bob AI Hackathon 2026
