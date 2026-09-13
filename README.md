@@ -1,121 +1,41 @@
-# 🚀 [Your Project Title Here]
+# Codewarrior AI — Autonomous Cold-Chain & Supply Chain Resiliency Copilot
 
-> ⚠️ **Replace everything in `[ ]` brackets with your actual content before submission.**
-
----
-
-## 👥 Team
-
-| Field | Value |
-|---|---|
-| **Team Name** | [Your Team Name] |
-| **Track** | [AI / DevOps / Sustainability / Open] |
-| **Team Lead** | [Name] — [email@ibm.com] |
-| **Members** | [Name 1], [Name 2], [Name 3] |
+Codewarrior AI is an autonomous logistics and cold-chain resilience copilot powered by IBM Bob and watsonx.ai. It ingests real-time IoT temperature and GPS telemetry alongside active weather disruption feeds, calculates FDA/WHO-standard Mean Kinetic Temperature (MKT) degradation in real time, autonomously locates nearby idle refrigerated fleet assets, and triggers emergency divert runbooks to rescue high-value cargo before spoilage occurs.
 
 ---
 
-## 🎯 Problem Statement
-
-> In 2–3 sentences: What problem does your project solve? Who experiences this problem?
-
-[Describe the real-world problem your project addresses. Be specific about who the user is and what pain point they face.]
+## The Problem
+Supply chain disruptions such as severe blizzards, route closures, and fleet asset imbalances cascade across hundreds of active shipments. Cold-chain cargo—specifically life-saving pediatric vaccines, insulin, and biopharmaceuticals—is exceptionally vulnerable. A single refrigeration failure across any transit leg destroys upwards of $500,000 in cargo. Traditionally, these temperature excursions are only discovered at the destination dock when the cargo has already spoiled.
 
 ---
 
-## 💡 Solution
-
-> In 2–3 sentences: What did you build? How does it solve the problem above?
-
-[Describe your solution clearly. Explain the core mechanism — what makes it work.]
-
----
-
-## ✨ Key Features
-
-- **Feature 1:** [Brief description — e.g., "Real-time anomaly detection using watsonx.ai"]
-- **Feature 2:** [Brief description]
-- **Feature 3:** [Brief description]
-- **Feature 4:** [Optional]
-- **Feature 5:** [Optional]
+## Key Features
+- Real-Time IoT Cold-Chain Sentinel: Continuously evaluates temperature telemetry and calculates Mean Kinetic Temperature (MKT) based on FDA/WHO biopharmaceutical degradation standards.
+- Geospatial Disruption Intersect Engine: Cross-references active shipment routes with real-time weather and road disruption polygons.
+- Autonomous Fleet Asset Rebalancing: Discovers idle refrigerated trailers (reefers) at nearby regional hubs and matches them for emergency cargo transfers.
+- Load-Bearing IBM Bob MCP Integration: Enables operators to query fleet risk conversationally and execute 1-click rescue runbooks through natural language.
+- Audit-Ready Regulatory Reporting: Generates instant compliance dossiers for pharmaceutical quality assurance officers.
 
 ---
 
-## 🛠️ Tech Stack
-
-| Category | Technologies |
-|---|---|
-| **Languages** | [e.g., Python, TypeScript] |
-| **Frameworks** | [e.g., FastAPI, React] |
-| **IBM Technologies** | [e.g., watsonx.ai, IBM Bob, IBM Cloud] |
-| **Databases** | [e.g., PostgreSQL, Redis] |
-| **Other** | [e.g., Docker, GitHub Actions] |
+## Tech Stack
+- Backend: Python 3.11, FastAPI, Uvicorn, Pydantic
+- AI & Reasoning: IBM Bob, watsonx.ai (Granite 3.0), Model Context Protocol (MCP)
+- Frontend: React, TailwindCSS, Leaflet GeoJSON
+- Automation & CI/CD: GitHub Actions (Automated Submission Validator)
 
 ---
 
-## 📁 Repository Structure
+## How to Run Locally
 
-```
-├── src/                  # All source code
-├── docs/                 # Written documentation
-│   ├── problem-statement.md
-│   ├── solution-overview.md
-│   ├── architecture.md
-│   └── setup-guide.md
-├── demo/                 # Demo artifacts
-│   ├── screenshots/      # App screenshots
-│   └── demo-video-link.txt  # Link to demo video
-├── presentation/         # Slide deck
-└── submission.yaml       # Structured submission metadata
-```
+### 1. Prerequisites
+- Python 3.10+
+- Node.js 18+ (for frontend)
+- Git
 
----
-
-## ⚡ How to Run
-
-> **Copy these exact steps from your [`docs/setup-guide.md`](docs/setup-guide.md)**
-
+### 2. Backend Setup
 ```bash
-# 1. Clone the repo
-git clone https://github.com/[your-repo].git
-cd [your-repo]
-
-# 2. Install dependencies
-[your install command here]
-
-# 3. Configure environment
-cp .env.example .env
-# Edit .env with your values
-
-# 4. Run the project
-[your run command here]
-```
-
----
-
-## 🖥️ Demo
-
-| Artifact | Link |
-|---|---|
-| 📹 Demo Video | [See demo/demo-video-link.txt](demo/demo-video-link.txt) |
-| 🌐 Live Demo | [See demo/live-demo-url.txt](demo/live-demo-url.txt) |
-| 🖼️ Screenshots | [See demo/screenshots/](demo/screenshots/) |
-| 📊 Presentation | [See presentation/slides.pdf](presentation/) |
-
----
-
-## ⚠️ Known Limitations
-
-> Be honest — judges appreciate transparency over overclaiming.
-
-- [Limitation 1: e.g., "Authentication is mocked — not production-ready"]
-- [Limitation 2: e.g., "Only tested on Chrome"]
-- [Limitation 3: e.g., "Feature X is scaffolded but not fully implemented"]
-
----
-
-## 🏅 What We're Most Proud Of
-
-[Tell the judges what part of your submission is strongest and worth paying close attention to.]
-
----
+cd src/backend
+python -m venv .venv
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
