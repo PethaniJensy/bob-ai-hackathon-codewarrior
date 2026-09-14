@@ -13,7 +13,12 @@ def calculate_mkt(temperatures_celsius: List[float]) -> float:
     temps_kelvin = [t + 273.15 for t in temperatures_celsius]
     n = len(temps_kelvin)
     sum_exp = sum(math.exp(-DELTA_H / (R * t)) for t in temps_kelvin)
-    mkt_kelvin = (DELTA_H / R) / (-math.log(sum_exp / n))
+    log_arg = sum_exp / n
+    # When all readings are identical log_arg == 1.0, so log == 0 → MKT is
+    # simply the common temperature itself (mathematically correct limit).
+    if log_arg == 1.0:
+        return round(temps_kelvin[0] - 273.15, 2)
+    mkt_kelvin = (DELTA_H / R) / (-math.log(log_arg))
     return round(mkt_kelvin - 273.15, 2)
 
 def evaluate_excursion_severity(temperatures_celsius: List[float], max_safe_temp: float = 8.0) -> Dict:
