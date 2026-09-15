@@ -1,6 +1,10 @@
 # Codewarrior AI — Autonomous Cold-Chain & Supply Chain Resiliency Copilot
 
-Codewarrior AI is an autonomous logistics and cold-chain resilience copilot powered by IBM Bob and watsonx.ai. It ingests real-time IoT temperature and GPS telemetry alongside active weather disruption feeds, calculates FDA/WHO-standard Mean Kinetic Temperature (MKT) degradation in real time, autonomously locates nearby idle refrigerated fleet assets, and triggers emergency divert runbooks to rescue high-value cargo before spoilage occurs.
+Codewarrior AI is an autonomous logistics and cold-chain resilience copilot powered by
+IBM Bob. It ingests real-time IoT temperature and GPS telemetry alongside active weather
+disruption feeds, calculates FDA/WHO-standard Mean Kinetic Temperature (MKT) degradation
+in real time, autonomously locates nearby idle refrigerated fleet assets, and triggers
+emergency divert runbooks to rescue high-value cargo before spoilage occurs.
 
 ---
 
@@ -19,11 +23,11 @@ Supply chain disruptions such as severe blizzards, route closures, and fleet ass
 ---
 
 ## Tech Stack
+
 - Backend: Python 3.11, FastAPI, Uvicorn, Pydantic
-- AI & Reasoning: IBM Bob, watsonx.ai (Granite 3.0), Model Context Protocol (MCP)
+- AI & Reasoning: IBM Bob, Model Context Protocol (MCP)
 - Frontend: React, TailwindCSS, Leaflet GeoJSON
 - Automation & CI/CD: GitHub Actions (Automated Submission Validator)
-
 ---
 
 ## How to Run Locally
