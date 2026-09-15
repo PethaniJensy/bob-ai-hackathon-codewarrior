@@ -13,7 +13,10 @@ ACTIVE_SHIPMENTS = [
         "target_temp_range": "2°C to 8°C",
         "temperature_history": [4.1, 4.2, 4.5, 5.8, 7.2, 8.4, 9.1],
         "carrier": "Titan Express Reefer #14",
-        "status": "CRITICAL_EXCURSION"
+        "status": "CRITICAL_EXCURSION",
+        "driver_name": "Marcus Reyes",
+        "driver_phone": "+1 (307) 555-0142",
+        "vehicle_number": "WY-REEFER-14",
     },
     {
         "id": "SHP-9022",
@@ -26,7 +29,10 @@ ACTIVE_SHIPMENTS = [
         "target_temp_range": "1°C to 4°C",
         "temperature_history": [2.1, 2.3, 2.2, 2.5, 2.4],
         "carrier": "Sierra Freight #09",
-        "status": "OPTIMAL"
+        "status": "OPTIMAL",
+        "driver_name": "Elena Cruz",
+        "driver_phone": "+1 (916) 555-0198",
+        "vehicle_number": "CA-SIERRA-09",
     }
 ]
 

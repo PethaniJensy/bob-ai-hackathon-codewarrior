@@ -2,8 +2,9 @@ import { Settings, Bell, Shield, Database, User } from 'lucide-react'
 
 export default function SettingsPage() {
   return (
-    <div className="space-y-6 max-w-2xl">
+    <div className="space-y-6">
       {/* API Configuration */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 items-start">
       <div className="card">
         <div className="card-header flex items-center gap-2">
           <Database size={15} className="text-surface-500" />
@@ -70,6 +71,7 @@ export default function SettingsPage() {
             <span className="font-medium text-brand-green">Connected</span>
           </div>
         </div>
+      </div>
       </div>
 
       <div className="flex gap-3">

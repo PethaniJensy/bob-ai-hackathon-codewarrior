@@ -12,6 +12,7 @@ import {
   Zap,
   Circle,
   ChevronLeft,
+  ChevronRight,
 } from 'lucide-react'
 import clsx from 'clsx'
 
@@ -37,33 +38,30 @@ export default function Sidebar({ collapsed, onToggle }) {
     >
       {/* Logo */}
       <div className="flex items-center justify-between px-4 py-5 border-b border-navy-800">
-        {!collapsed && (
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 bg-brand-blue rounded-md flex items-center justify-center shrink-0">
-              <Zap className="w-4.5 h-4.5 text-white" size={18} />
-            </div>
-            <div className="min-w-0">
-              <div className="text-white font-bold text-sm leading-none truncate">CODEWARRIOR AI</div>
-              <div className="text-slate-400 text-xs mt-0.5 leading-none truncate">Fleet Crisis & Cold-Chain</div>
-            </div>
-          </div>
-        )}
-        {collapsed && (
-          <div className="w-8 h-8 bg-brand-blue rounded-md flex items-center justify-center mx-auto">
-            <Zap size={18} className="text-white" />
-          </div>
-        )}
-        <button
-          onClick={onToggle}
-          className={clsx(
-            'text-slate-400 hover:text-white p-1 rounded transition-colors',
-            collapsed && 'hidden'
-          )}
-          aria-label="Collapse sidebar"
-        >
-          <ChevronLeft size={16} />
-        </button>
+  {!collapsed && (
+    <div className="flex items-center gap-2.5 min-w-0">
+      <div className="w-8 h-8 bg-brand-blue rounded-md flex items-center justify-center shrink-0">
+        <Zap className="w-4.5 h-4.5 text-white" size={18} />
       </div>
+      <div className="min-w-0">
+        <div className="text-white font-bold text-sm leading-none truncate">CODEWARRIOR AI</div>
+        <div className="text-slate-400 text-xs mt-0.5 leading-none truncate">Fleet Crisis & Cold-Chain</div>
+      </div>
+    </div>
+  )}
+  {collapsed && (
+    <div className="w-8 h-8 bg-brand-blue rounded-md flex items-center justify-center mx-auto">
+      <Zap size={18} className="text-white" />
+    </div>
+  )}
+  <button
+    onClick={onToggle}
+    className="text-slate-400 hover:text-white p-1 rounded transition-colors"
+    aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+  >
+    {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+  </button>
+</div>
 
       {/* Navigation */}
       <nav className="flex-1 px-2 py-4 space-y-0.5 overflow-y-auto scrollbar-thin">

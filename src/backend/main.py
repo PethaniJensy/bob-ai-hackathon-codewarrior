@@ -1,6 +1,7 @@
 """
 Codewarrior AI - FastAPI Server
 """
+import random
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from engine import evaluate_excursion_severity
@@ -16,6 +17,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+def _drift(location: dict, step: float = 0.003):
+    """Nudges a location slightly to simulate live GPS movement."""
+    location["lat"] += random.uniform(-step, step)
+    location["lng"] += random.uniform(-step, step)
+
 @app.get("/")
 def root():
     return {"status": "online", "system": "Codewarrior AI Resiliency Engine"}
@@ -28,6 +34,7 @@ def health():
 def get_shipments():
     results = []
     for s in ACTIVE_SHIPMENTS:
+        _drift(s["current_location"])
         analysis = evaluate_excursion_severity(s["temperature_history"])
         results.append({**s, "telemetry_analysis": analysis})
     return results
@@ -38,6 +45,8 @@ def get_disruptions():
 
 @app.get("/api/idle-fleet")
 def get_idle_fleet():
+    for f in IDLE_FLEET:
+        _drift(f["location"])
     return IDLE_FLEET
 
 @app.post("/api/rescue-shipment/{shipment_id}")

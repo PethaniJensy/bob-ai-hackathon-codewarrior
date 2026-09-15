@@ -17,6 +17,9 @@ const FALLBACK_SHIPMENTS = [
     temperature_history: [4.1, 4.2, 4.5, 5.8, 7.2, 8.4, 9.1],
     carrier: 'Titan Express Reefer #14',
     status: 'CRITICAL_EXCURSION',
+    driver_name: 'Marcus Reyes',
+    driver_phone: '+1 (307) 555-0142',
+    vehicle_number: 'WY-REEFER-14',
     telemetry_analysis: {
       mkt_celsius: 8.42,
       excursion_detected: true,
@@ -36,6 +39,9 @@ const FALLBACK_SHIPMENTS = [
     temperature_history: [2.1, 2.3, 2.2, 2.5, 2.4],
     carrier: 'Sierra Freight #09',
     status: 'OPTIMAL',
+    driver_name: 'Elena Cruz',
+    driver_phone: '+1 (916) 555-0198',
+    vehicle_number: 'CA-SIERRA-09',
     telemetry_analysis: {
       mkt_celsius: 2.3,
       excursion_detected: false,
@@ -67,7 +73,11 @@ const FALLBACK_FLEET = [
     distance_miles: 14.2,
     eta_minutes: 22,
     status: 'AVAILABLE_IMMEDIATE',
+    driver_name: 'Tom Whitfield',
+    driver_phone: '+1 (307) 555-0177',
+    vehicle_number: 'WY-REEFER-04',
   },
+  
   {
     asset_id: 'REEFER-CO-11',
     equipment_type: '48ft Refrigerated Trailer',
@@ -76,6 +86,9 @@ const FALLBACK_FLEET = [
     distance_miles: 48.6,
     eta_minutes: 55,
     status: 'AVAILABLE_STANDBY',
+    driver_name: 'Priya Nair',
+    driver_phone: '+1 (970) 555-0163',
+    vehicle_number: 'CO-REEFER-11',
   },
 ]
 

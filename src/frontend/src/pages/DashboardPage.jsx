@@ -27,8 +27,8 @@ export default function DashboardPage() {
   const [successResult, setSuccessResult] = useState(null)
   const [copilotEvents, setCopilotEvents] = useState([])
 
-  const fetchData = async () => {
-    setLoading(true)
+  const fetchData = async (silent = false) => {
+  if (!silent) setLoading(true)
     setLoadError(null)
     try {
       const [s, d, f] = await Promise.all([
@@ -42,11 +42,16 @@ export default function DashboardPage() {
     } catch (err) {
       setLoadError(err.message || 'Unable to connect to backend.')
     } finally {
-      setLoading(false)
+      if (!silent) setLoading(false)
     }
   }
 
-  useEffect(() => { fetchData() }, [])
+  useEffect(() => { 
+    fetchData() 
+      const interval = setInterval(() => fetchData(true), 5000)
+  return () => clearInterval(interval)
+
+  }, [])
 
   const criticalShipment = shipments.find((s) => s.status === 'CRITICAL_EXCURSION') || shipments[0]
   const activeDisruption = disruptions[0]
@@ -157,7 +162,7 @@ export default function DashboardPage() {
       {/* Map + AI Recommendation */}
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-6">
         <div className="xl:col-span-3">
-          <LogisticsMap />
+          <LogisticsMap shipments={shipments} fleet={fleet}/>
         </div>
         <div className="xl:col-span-2">
           <AIRecommendation

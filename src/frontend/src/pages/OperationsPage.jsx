@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { AlertTriangle, CheckCircle, Clock, Truck, ChevronRight } from 'lucide-react'
 import StatusBadge from '../components/common/StatusBadge'
 
@@ -68,37 +69,11 @@ const INCIDENTS = [
 ]
 
 export default function OperationsPage() {
+  const [expandedId, setExpandedId] = useState(null) 
   return (
     <div className="space-y-6">
       {/* Active Incidents */}
-      <div className="card">
-        <div className="card-header flex items-center gap-2">
-          <AlertTriangle size={15} className="text-brand-red" />
-          <span className="text-sm font-bold text-navy-950">Active Incidents</span>
-        </div>
-        <div className="divide-y divide-surface-100">
-          {INCIDENTS.map((inc) => (
-            <div key={inc.id} className="flex items-start gap-3 px-5 py-3.5">
-              <div className={`w-2 h-2 rounded-full mt-2 shrink-0 ${
-                inc.severity === 'critical' ? 'bg-brand-red' :
-                inc.severity === 'warning' ? 'bg-amber-400' : 'bg-brand-blue'
-              }`} />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="text-sm font-semibold text-navy-950">{inc.title}</div>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-xs text-surface-400">{inc.time}</span>
-                    <StatusBadge status={inc.severity} label={inc.status} />
-                  </div>
-                </div>
-                <div className="text-xs text-surface-500 mt-0.5">{inc.desc}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Operational Priority List */}
+            {/* Operational Priority List */}
       <div className="card">
         <div className="card-header flex items-center justify-between">
           <span className="text-sm font-bold text-navy-950">Operational Priority Queue</span>
@@ -108,28 +83,41 @@ export default function OperationsPage() {
           {PRIORITIES.map((p, idx) => {
             const Icon = p.icon
             return (
-              <div
-                key={p.id}
-                className="flex items-center gap-3 px-5 py-3.5 hover:bg-surface-50 transition-colors cursor-pointer"
-                role="button"
-                tabIndex={0}
-              >
-                <span className="w-6 h-6 rounded-full bg-surface-100 text-surface-600 text-xs font-bold flex items-center justify-center shrink-0">
-                  {idx + 1}
-                </span>
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${p.iconCls}`}>
-                  <Icon size={15} />
+              <div key={p.id}>
+                <div
+                  className="flex items-center gap-3 px-5 py-3.5 hover:bg-surface-50 transition-colors cursor-pointer"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setExpandedId(expandedId === p.id ? null : p.id)}
+                >
+                  <span className="w-6 h-6 rounded-full bg-surface-100 text-surface-600 text-xs font-bold flex items-center justify-center shrink-0">
+                    {idx + 1}
+                  </span>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${p.iconCls}`}>
+                    <Icon size={15} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-semibold text-navy-950">{p.id}</div>
+                    <div className="text-xs text-surface-500 truncate">{p.label}</div>
+                  </div>
+                  <div className="hidden sm:flex items-center gap-3 shrink-0">
+                    <span className="text-xs text-surface-500">{p.action}</span>
+                    <span className="text-xs font-semibold text-surface-700">{p.value}</span>
+                    <StatusBadge status={p.risk} />
+                  </div>
+                  <ChevronRight
+                    size={14}
+                    className={`text-surface-400 shrink-0 transition-transform duration-200 ${expandedId === p.id ? 'rotate-90' : ''}`}
+                  />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-semibold text-navy-950">{p.id}</div>
-                  <div className="text-xs text-surface-500 truncate">{p.label}</div>
-                </div>
-                <div className="hidden sm:flex items-center gap-3 shrink-0">
-                  <span className="text-xs text-surface-500">{p.action}</span>
-                  <span className="text-xs font-semibold text-surface-700">{p.value}</span>
-                  <StatusBadge status={p.risk} />
-                </div>
-                <ChevronRight size={14} className="text-surface-400 shrink-0" />
+
+                {expandedId === p.id && (
+                  <div className="px-5 pb-4 pl-14 bg-surface-50 text-xs text-surface-600 space-y-1">
+                    <div>Action: <span className="font-medium text-surface-700">{p.action}</span></div>
+                    <div>Value at risk: <span className="font-medium text-surface-700">{p.value}</span></div>
+                    <div>Risk level: <span className="font-medium text-surface-700 capitalize">{p.risk}</span></div>
+                  </div>
+                )}
               </div>
             )
           })}
