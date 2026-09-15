@@ -1,79 +1,52 @@
 # Setup Guide
 
-> **This file is read by the automated evaluation pipeline. Be precise and complete.**
-
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+- Python 3.10+
+- Node.js 18+
+- Git
 
-- [ ] [e.g., Python 3.11+]
-- [ ] [e.g., Node.js 18+]
-- [ ] [e.g., Docker Desktop]
-- [ ] [e.g., An IBM Cloud account with watsonx.ai access]
+## 1. Clone the repo
 
-## Environment Variables
+git clone https://github.com/PethaniJensy/bob-ai-hackathon-codewarrior.git
+cd bob-ai-hackathon-codewarrior
 
-Copy `.env.example` to `.env` and fill in the values:
+## 2. Backend setup
 
-```bash
-cp .env.example .env
-```
+cd src/backend
+python -m venv .venv
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
 
-| Variable | Description | Required |
-|---|---|---|
-| `WATSONX_API_KEY` | Your IBM watsonx.ai API key | Yes |
-| `WATSONX_PROJECT_ID` | Your watsonx.ai project ID | Yes |
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `SLACK_WEBHOOK_URL` | Slack webhook for alerts | No |
+The API will be live at http://localhost:8000. Endpoints include /api/shipments,
+/api/disruptions, and /api/idle-fleet.
 
-## Installation
+## 3. Frontend setup
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/[your-org]/[your-repo].git
-cd [your-repo]
+Open a second terminal:
 
-# 2. Install backend dependencies
-[your command — e.g.: pip install -r requirements.txt]
+cd src/frontend
+npm install
+npm run dev
 
-# 3. Install frontend dependencies (if applicable)
-[your command — e.g.: cd frontend && npm install]
+The dashboard will be available at http://localhost:5173 (or whatever port Vite/CRA prints).
+It polls the backend every few seconds, so start the backend first.
 
-# 4. Set up the database (if applicable)
-[your command — e.g.: python manage.py migrate]
-```
+## 4. Run the MCP server (for IBM Bob integration)
 
-## Running the Application
+cd src/mcp-server
+python server.py
 
-```bash
-# Start the backend
-[your command — e.g.: uvicorn app.main:app --reload]
+This starts the MCP server over stdio. Point IBM Bob at this process so it can call
+scan_active_disruptions, evaluate_shipment_excursion, and execute_emergency_rescue directly.
 
-# Start the frontend (in a separate terminal, if applicable)
-[your command — e.g.: cd frontend && npm run dev]
-```
+## Sample data
 
-The application will be available at: `http://localhost:[PORT]`
-
-## Running Tests
-
-```bash
-[your test command — e.g.: pytest tests/ -v]
-```
-
-## Quick Demo (Optional)
-
-If you have a demo script or sample data to showcase the project quickly:
-
-```bash
-[e.g.: python demo/seed_demo_data.py]
-[e.g.: open http://localhost:8000/demo]
-```
+The backend ships with in-memory sample shipment, disruption, and idle-fleet data
+(src/backend/data.py) — no database setup is required to run the demo.
 
 ## Troubleshooting
 
-| Issue | Solution |
-|---|---|
-| [e.g., `ModuleNotFoundError`] | [e.g., Run `pip install -r requirements.txt` again] |
-| [e.g., Database connection refused] | [e.g., Ensure PostgreSQL is running: `docker compose up db`] |
-| [e.g., watsonx.ai 401 error] | [e.g., Check `WATSONX_API_KEY` in your `.env` file] |
+- Port already in use: change --port 8000 to another port and update the frontend's API base URL.
+- CORS errors: the backend allows all origins by default for local development.

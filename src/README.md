@@ -1,18 +1,14 @@
 # ColdChain AI — Source Code
 
-## Current State
-Backend API is complete and running.
-Frontend and MCP server are being built by other team members.
-
-## Directory Structure (in progress)
+## Directory Structure
 
 src/
-├── backend/          # ✅ COMPLETE — FastAPI REST API (Python)
-├── frontend/         # 🔨 IN PROGRESS — React dashboard (Member 3)
-├── mcp-server/       # 🔨 IN PROGRESS — IBM Bob MCP integration (Member 4)
+├── backend/          # FastAPI REST API (Python)
+├── frontend/         # React dashboard
+├── mcp-server/       # IBM Bob MCP integration
 └── .env.example      # Environment variable template
 
-## backend/ — FastAPI Server (port 8000) ✅ READY
+## backend/ — FastAPI Server (port 8000)
 
 **Run:**
 cd src/backend
@@ -37,7 +33,27 @@ Docs:   http://localhost:8000/docs
 | GET | /api/idle-fleet | Available reefer trucks |
 | POST | /api/rescue-shipment/{id} | Trigger emergency rescue |
 
+## frontend/ — React Dashboard (port 5173)
+
+**Run:**
+cd src/frontend
+npm install
+npm run dev
+
+Polls the backend every few seconds — start the backend first.
+
+## mcp-server/ — IBM Bob MCP Integration
+
+**Run:**
+cd src/mcp-server
+python server.py
+
+Starts over stdio. Exposes three tools to IBM Bob: `scan_active_disruptions`,
+`evaluate_shipment_excursion`, `execute_emergency_rescue`. Runs entirely on the
+backend's in-memory data — no external API calls or environment variables required.
+
 ## Environment Variables
 
-Copy src/.env.example to src/.env and fill in your values.
-Required for MCP server (Member 4): WATSONX_API_KEY, WATSONX_PROJECT_ID
+Copy src/.env.example to src/.env. Not required to run this build — all three
+components use in-memory sample data. WATSONX_API_KEY / WATSONX_PROJECT_ID are
+placeholders scoped for a future direct watsonx.ai integration, currently unused.
