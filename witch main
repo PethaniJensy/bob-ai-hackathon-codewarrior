@@ -1,0 +1,14 @@
+*   [33ma240b27[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeat/frontend-dashboard[m[33m)[m Merge remote-tracking branch 'origin/main' into feat/frontend-dashboard
+[31m|[m[32m\[m  
+[31m|[m * [33m087011c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Fix docs: align README/submission.yaml with actual MCP implementation, remove unfulfilled watsonx.ai claims
+* [32m|[m [33mbd9b494[m add presentation
+* [32m|[m [33mff9fbeb[m upload demo video link
+[32m|[m[32m/[m  
+* [33m4ce9c07[m change save & reset button feature in settings
+* [33m1a84676[m Fix sidebar collapse, profile/notification dropdowns, priority queue toggle, settings layout, and add live map with driver info + polling
+*   [33m1f9d0d5[m[33m ([m[1;31morigin/feature/frontend[m[33m)[m Integrate backend API and MCP updates
+[33m|[m[34m\[m  
+[33m|[m *   [33m02693cd[m Merge branch 'main' of https://github.com/PethaniJensy/bob-ai-hackathon-codewarrior
+[33m|[m [35m|[m[36m\[m  
+[33m|[m [35m|[m * [33me2b6356[m[33m ([m[1;32mmain[m[33m)[m fix(docs): README reflects actual repo state — backend complete
+[33m|[m [35m|[m * [33meed9b16[m fix(backend): fleet dispatch deduplication, pydantic version fix — backend complete
